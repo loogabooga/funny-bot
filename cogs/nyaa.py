@@ -12,7 +12,7 @@ def sort(List):
     for i in range(len(List)):
         y = dict(List[i])
         y = int(y["seeders"])
-        if y > x:
+        if y => x:
             x = y
             print(f"x: {x}, y: {y}")
             List.insert(0, List.pop(i))
