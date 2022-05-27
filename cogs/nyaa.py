@@ -27,9 +27,9 @@ class nyaa(commands.Cog):
         result = Nyaa.Nyaa.search(keyword=query,category=1)
         result = sort(result)
         name = "```"
-        for i in range(15):
+        for i in range(10):
             try:
-                name = name + f"{i+1}. {str(result[i]['name'])}\nId: {str(result[i]['id'])}\nSeeders: {str(result[i]['seeders'])}\n\n"
+                name = name + f"{i+1}. {str(result[i]['name'])}\nHash: {Nyaa.Nyaa.get(result[i]['id'])['hash']}\nSeeders: {str(result[i]['seeders'])}\n\n"
             except:
                 pass
         name = name + "```"
