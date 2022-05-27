@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import os
 import json
+from asyncio import sleep
 
 
 with open('cnofig.json') as f:
@@ -21,6 +22,7 @@ async def reload(ctx):
         if filename.endswith('.py'):
             bot.reload_extension(f'cogs.{filename[:-3]}')
             print(f'Reloaded {filename}')
+            await sleep(0.1)
             await ctx.message.delete()
 
 # coghgers
@@ -29,4 +31,5 @@ for filename in os.listdir('cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}')
         
 
-bot.run(config['token'], bot=True, reconnect=True)
+bot.run(config["token"], bot=True, reconnect=True)
+

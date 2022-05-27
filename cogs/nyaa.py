@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import NyaaPy.nyaa as Nyaa
+from random import randint
 
 intents = discord.Intents.default()
 intents.members = True
@@ -12,7 +13,7 @@ def sort(List):
     for i in range(len(List)):
         y = dict(List[i])
         y = int(y["seeders"])
-        if y => x:
+        if y >= x:
             x = y
             print(f"x: {x}, y: {y}")
             List.insert(0, List.pop(i))
@@ -38,7 +39,18 @@ class nyaa(commands.Cog):
     async def hash(self, ctx, *, id):
         result = Nyaa.Nyaa.get(id)
         await ctx.send(result["hash"])
+    @commands.command()
+    async def funny(self, ctx):
+        result = Nyaa.Nyaa.get_user("Judas")
+        result = result[randint(0, len(result)-1)]["id"]
+        await ctx.send(Nyaa.Nyaa.get(result)["hash"])
 
 
 def setup(bot):
     bot.add_cog(nyaa(bot))
+
+
+# if you don't know what the functions mean, just ignore them
+# the code is pretty self explanatory
+# - Gitbub Copilot
+
