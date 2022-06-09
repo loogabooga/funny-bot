@@ -15,7 +15,6 @@ def sort(List):
         y = int(y["seeders"])
         if y >= x:
             x = y
-            print(f"x: {x}, y: {y}")
             List.insert(0, List.pop(i))
 
     return List
@@ -25,15 +24,16 @@ class nyaa(commands.Cog):
         self.bot = bot
     @commands.command()
     async def nyaa(self, ctx, *, query):
-        result = Nyaa.Nyaa.search(keyword=query,category=1)
-        result = sort(result)
-        name = "```"
-        for i in range(10):
-            try:
-                name = name + f"{i+1}. {str(result[i]['name'])}\nHash: {Nyaa.Nyaa.get(result[i]['id'])['hash']}\nSeeders: {str(result[i]['seeders'])}\n\n"
-            except:
-                pass
-        name = name + "```"
+        async with ctx.channel.typing():
+            result = Nyaa.Nyaa.search(keyword=query,category=1)
+            result = sort(result)
+            name = "```"
+            for i in range(10):
+                try:
+                    name = name + f"{i+1}. {str(result[i]['name'])}\nHash: {Nyaa.Nyaa.get(result[i]['id'])['hash']}\nSeeders: {str(result[i]['seeders'])}\n\n"
+                except:
+                    pass
+            name = name + "```"
         await ctx.send(name)
     @commands.command()
     async def hash(self, ctx, *, id):

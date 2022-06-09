@@ -10,6 +10,10 @@ class image(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     @commands.command() 
+    # send a message to the channel
+    async def edge(self, ctx):
+        await ctx.send("currently broketn. sorry :(")
+    """
     async def edge(self, ctx, *, query=""):
         # get image from message attachment
         if ctx.message.attachments:
@@ -71,6 +75,7 @@ class image(commands.Cog):
                 await ctx.send(file=discord.File('/dev/shm/edge.png'))
             else:
                 await ctx.send("Please attach an image or provide a url to an image.")
+                """
 def setup(bot):
     bot.add_cog(image(bot))
 
